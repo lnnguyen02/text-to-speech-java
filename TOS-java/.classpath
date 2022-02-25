@@ -7,5 +7,15 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="C:/Users/Leon/git/text-to-speech/TOS-java/jsapi.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Leon/git/text-to-speech/TOS-java/lib/cmu_time_awb.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Leon/git/text-to-speech/TOS-java/lib/cmu_us_kal.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Leon/git/text-to-speech/TOS-java/lib/cmudict04.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Leon/git/text-to-speech/TOS-java/lib/cmulex.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Leon/git/text-to-speech/TOS-java/lib/cmutimelex.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Leon/git/text-to-speech/TOS-java/lib/en_us.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Leon/git/text-to-speech/TOS-java/lib/freetts.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Leon/git/text-to-speech/TOS-java/lib/freetts-jsapi10.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Leon/git/text-to-speech/TOS-java/lib/jsapi.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Leon/git/text-to-speech/TOS-java/lib/mbrola.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
