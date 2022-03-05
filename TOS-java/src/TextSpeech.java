@@ -11,6 +11,10 @@ import java.util.Scanner;
 
 public class TextSpeech {
 
+	/**
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		try {
@@ -31,11 +35,11 @@ public class TextSpeech {
 
 			// Speaks the given text
 			// until the queue is empty.
-			synthesizer.speakPlainText("Hello World!", null);
-			synthesizer.waitEngineState(Synthesizer.QUEUE_EMPTY);
-			// TEMP START
+			//synthesizer.speakPlainText("Hello World!", null);
+			//synthesizer.waitEngineState(Synthesizer.QUEUE_EMPTY);
+			
+			// Reads out the content of tempFile.txt
 			speak(synthesizer, "tempFile.txt");
-			// TEMP STOP
 
 			// Deallocate the Synthesizer.
 			synthesizer.deallocate();
@@ -46,6 +50,15 @@ public class TextSpeech {
 		}
 	}
 
+	/**
+	 * Reads, line by line, the fileName.txt outloud.
+	 * 
+	 * @param synth A proper Synthesizer object
+	 * @param fileName A valid text file name that exists on the same level as the src folder
+	 * 
+	 * @throws IllegalArgumentException
+	 * @throws InterruptedException
+	 */
 	public static void speak(Synthesizer synth, String fileName) throws IllegalArgumentException, InterruptedException {
 		try {
 
