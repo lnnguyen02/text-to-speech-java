@@ -2,6 +2,7 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Locale;
 import javax.speech.Central;
@@ -31,7 +32,7 @@ public class TextSpeech {
 			// Setting up the responses for the chat bot
 			setUp();
 			readingInput(synthesizer);
-			
+
 			// Deallocate the Synthesizer.
 			synthesizer.deallocate();
 		} catch (Exception e) {
@@ -72,9 +73,17 @@ public class TextSpeech {
 	 * @throws FileNotFoundException
 	 */
 	public static void setUp() throws FileNotFoundException {
+		// Setting up the casual responses
 		Scanner fileReader = new Scanner(new File("text.txt"));
 		while (fileReader.hasNextLine()) {
-			responses.put(fileReader.nextLine(), fileReader.nextLine());
+			String[] line = fileReader.nextLine().split("\\.");
+			responses.put(line[0].trim().toLowerCase(), line[1].trim());
+		}
+		// Setting up the commands
+		fileReader = new Scanner(new File("commands.txt"));
+		while (fileReader.hasNextLine()) {
+			String[] line = fileReader.nextLine().split("\\.");
+			responses.put(line[0].trim().toLowerCase(), line[1].trim());
 		}
 	}
 
@@ -93,12 +102,74 @@ public class TextSpeech {
 				break loop;
 
 			if (responses.get(input) != null) {
-				synthesizer.speakPlainText(responses.get(input), null);
-				synthesizer.waitEngineState(Synthesizer.QUEUE_EMPTY);
+				switch (responses.get(input)) {
+				case "time":
+					time(synthesizer);
+					break;
+				case "date":
+					break;
+				default:
+					synthesizer.speakPlainText(responses.get(input), null);
+					synthesizer.waitEngineState(Synthesizer.QUEUE_EMPTY);
+					break;
+				}
 			}
 		}
 
 		scanner.close();
 	}
 	// EOF
+	
+	
+	public static void time(Synthesizer synthesizer) throws IllegalArgumentException, InterruptedException {
+		String [] time = java.time.LocalTime.now().toString().split(":");
+		int hour = Integer.parseInt(time[0]);
+		
+		String speechLine = "";
+		if(hour==0)
+			speechLine += "It is twelve " + time[1] + " am";
+		else if(hour<12)
+			speechLine += "It is "+ numberToText(hour) + time[1] + " am";
+		else if(hour==12)
+			speechLine += "It is "+ numberToText(hour) + time[1] + " pm";
+		else if(hour>12) {
+			hour = hour - 12;
+			speechLine += "It is "+ numberToText(hour) + " " + time[1] + " pm";
+		}
+		synthesizer.speakPlainText(speechLine, null);
+		synthesizer.waitEngineState(Synthesizer.QUEUE_EMPTY);
+	}
+	
+	private static String numberToText(int number) {
+		switch (number) {
+		case 1:
+			return "one";
+		case 2:
+			return "two";
+		case 3:
+			return "three";
+		case 4:
+			return "four";
+		case 5:
+			return "five";
+		case 6:
+			return "six";
+		case 7:
+			return "seven";
+		case 8:
+			return "eight";
+		case 9:
+			return "nine";
+		case 10:
+			return "ten";
+		case 11:
+			return "eleven";
+		default:
+			return "";
+		}
+	}
+	
+	public static void date(Synthesizer synthesizer) throws IllegalArgumentException, InterruptedException {
+		
+	}
 }
